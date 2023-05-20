@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const { errors, celebrate, Joi } = require('celebrate');
+const cors = require('cors');
 const { limiter } = require('./middlewares/limiter');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
@@ -18,6 +19,7 @@ const { PORT = 3000 } = process.env;
 mongoose.set('strictQuery', true);
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
