@@ -1,0 +1,27 @@
+.popup__button-delete {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  background-color: #000;
+  color: #fff;
+  width: 358px;
+  height: 50px;
+  margin-top: 38px;
+  border: none;
+}
+
+.popup__button-delete:valid:hover {
+  opacity: 80%;
+  cursor: pointer;
+}
+
+@media (max-width: 1279px) {
+  .popup__button-delete {
+    height: 46px;
+    width: 238px;
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

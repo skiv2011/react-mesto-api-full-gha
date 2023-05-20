@@ -1,0 +1,9 @@
+.element {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+  gap: 20px 17px;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  list-style: none;
+}
