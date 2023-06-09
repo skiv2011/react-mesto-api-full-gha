@@ -55,7 +55,7 @@ function Register(props) {
           <button className="login__enter-button" type="submit">
             Зарегистрироваться
           </button>
-          <Link to="/sign-in" className="login__substring">
+          <Link to="/signin" className="login__substring">
             Уже зарегистрированы? Войти
           </Link>
         </form>

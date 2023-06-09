@@ -33,7 +33,6 @@ function App() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    tokenCheck();
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([user, initialCards]) => {
         setCurrentUser(user);
@@ -81,10 +80,10 @@ function App() {
     auth
       .login(email, password)
       .then((data) => {
-        localStorage.setItem("token", data.token);
+        localStorage.setItem('userId', data._id);
         setUserEmail(email);
         setLoggedIn(true);
-        history("/");
+        history('/');
       })
       .catch(() => {
         setIsInfoToolSuccess(false);
@@ -116,13 +115,13 @@ function App() {
   }
 
   function handleLogout() {
-    localStorage.removeItem("token");
+    localStorage.removeItem('userId');
     setLoggedIn(false);
-    history("/sign-in");
+    history("/signin");
   }
 
   function tokenCheck() {
-    const jwt = localStorage.getItem("token");
+    const jwt = localStorage.getItem('userId');
     if (!jwt) {
       return;
     }
@@ -136,7 +135,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -227,12 +226,12 @@ function App() {
       <div className="page">
         <Routes>
           <Route
-            path="/sign-up"
+            path="/signup"
             element={
               <Register
                 onRegister={handleRegister}
                 headerText="Войти"
-                headerLink="/sign-in"
+                headerLink="/signin"
                 loggedIn={loggedIn}
                 isInfoToolOpen={isInfoToolOpen}
                 onClose={closeAllPopups}
@@ -240,11 +239,11 @@ function App() {
             }
           />
           <Route
-            path="/sign-in"
+            path="/signin"
             element={
               <Login
                 onLogin={handleLogin}
-                headerLink="/sign-up"
+                headerLink="/signup"
                 headerText="Регистрация"
                 isInfoToolOpen={isInfoToolOpen}
                 onClose={closeAllPopups}
@@ -275,7 +274,7 @@ function App() {
           <Route
             path="*"
             element={
-              loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
+              loggedIn ? <Navigate to="/" /> : <Navigate to="/signin" />
             }
           />
         </Routes>
