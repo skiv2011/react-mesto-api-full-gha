@@ -1,6 +1,5 @@
-// export const BASE_URL = 'api.firemandzen.nomoredomains.monster';
-export const BASE_URL = 'http://localhost:3000';
-// export const BASE_URL ="http://api.firemandzen.nomoredomains.monster";
+// export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL ='http://api.firemandzen.nomoredomains.monster';
 
 const check= (res) => {
     if (res.ok) {

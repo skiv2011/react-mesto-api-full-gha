@@ -111,7 +111,8 @@ body: JSON.stringify({
 }
 
 const api = new Api({
-  baseUrl: 'http://localhost:3000',
+  // baseUrl: 'http://localhost:3000',
+  baseUrl:'api.firemandzen.nomoredomains.monster',
   headers: {
     'Content-Type': 'application/json',
   }
