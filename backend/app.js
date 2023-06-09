@@ -74,7 +74,7 @@ app.use('/*', (req, res, next) => {
 
 app.use(errors());
 app.use(errorHandler);
-
+//проверить
 mongoose
   .connect('mongodb://127.0.0.1/mestodb')
   .then(() => console.log('Успешное подключение к MongoDB'))
