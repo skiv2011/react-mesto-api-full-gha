@@ -28,7 +28,7 @@ const options = {
     'https://localhost:3001',
     'http://firemandzen.nomoredomains.monster',
     'https://firemandzen.nomoredomains.monster',
-],
+  ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
   optionsSuccessStatus: 204,
@@ -38,13 +38,11 @@ const options = {
 
 app.use('*', cors(options));
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(helmet());
 app.use(limiter);
-
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
