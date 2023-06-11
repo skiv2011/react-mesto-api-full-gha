@@ -8,8 +8,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 158.160.17.177
 
-Frontend https://...
+Frontend https://firemandzen.nomoredomains.monster
 
-Backend https://...
+Backend https://api.firemandzen.nomoredomains.monster
