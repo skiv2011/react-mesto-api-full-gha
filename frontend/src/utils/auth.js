@@ -1,5 +1,6 @@
 
-export const BASE_URL = 'http://api.firemandzen.nomoredomains.monster';
+export const BASE_URL = 'https://api.firemandzen.nomoredomains.monster';
+// export const BASE_URL = 'http://localhost:3000';
 
 const check= (res) => {
     if (res.ok) {
@@ -35,8 +36,7 @@ const check= (res) => {
   };
 
   export const tokenCheck = (token) => {
-
-    return fetch(`${BASE_URL}/users/me`, {
+      return fetch(`${BASE_URL}/users/me`, {
       credentials: "include",
       method: "GET",
       headers: {

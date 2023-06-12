@@ -19,16 +19,16 @@ class Api {
   getUserInfo() {
       return fetch(`${this._baseUrl}/users/me`, {
       credentials: "include",
-
-    }).then((res) => {
+     }).then((res) => {
       return this._check(res);
     });
   }
 
   editProfile(name, about) {
       return fetch(`${this._baseUrl}/users/me`, {
+        credentials: "include",
       method: "PATCH",
-      credentials: "include",
+
       headers: {
         "content-type": "application/json",
 },
@@ -42,11 +42,9 @@ body: JSON.stringify({
   }
 
   getInitialCards() {
-
-    return fetch(`${this._baseUrl}/cards`, {
+      return fetch(`${this._baseUrl}/cards`, {
       credentials: "include",
-
-    }).then((res) => {
+     }).then((res) => {
       return this._check(res);
     });
   }
@@ -76,8 +74,7 @@ body: JSON.stringify({
   }
 
   editAvatar(avatar) {
-
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      return fetch(`${this._baseUrl}/users/me/avatar`, {
       credentials: "include",
       method: "PATCH",
       headers: {
@@ -111,7 +108,8 @@ body: JSON.stringify({
 }
 
 const api = new Api({
-  baseUrl: 'http://api.firemandzen.nomoredomains.monster',
+  baseUrl: 'https://api.firemandzen.nomoredomains.monster',
+  // baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   }
