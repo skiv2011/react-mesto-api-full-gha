@@ -35,6 +35,17 @@ const check= (res) => {
     })
   };
 
+  export const logout = () => {
+    return fetch(`${BASE_URL}/logout`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+    })
+  }
+
   export const tokenCheck = (token) => {
       return fetch(`${BASE_URL}/users/me`, {
       credentials: "include",

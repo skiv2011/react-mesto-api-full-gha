@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.17.177
+IP 158.160.17.177
 
 Frontend https://firemandzen.nomoredomains.monster
 

@@ -9,11 +9,12 @@ const cors = require('cors');
 const { limiter } = require('./middlewares/limiter');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
-const { login, createUser } = require('./controllers/users');
+const { login, logout, createUser } = require('./controllers/users');
 const NotFoundError = require('./errors/not-found-err');
 const { auth } = require('./middlewares/auth');
 const { regexURL } = require('./utils/constants');
 const { errorHandler } = require('./middlewares/errorHandler');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 mongoose.set('strictQuery', true);
@@ -44,6 +45,14 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(limiter);
 
+app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -65,11 +74,13 @@ app.use(auth);
 
 app.use('/users', userRouter);
 app.use('/cards', cardRouter);
+app.delete('/logout', logout);
 
 app.use('/*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
 
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
