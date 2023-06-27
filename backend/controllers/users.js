@@ -91,7 +91,8 @@ module.exports.login = async (req, res, next) => {
     }
     const token = await jwt.sign(
       { _id: user._id },
-      'dev-secret',
+      // eslint-disable-next-line no-undef
+      process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
       { expiresIn: '7d' },
     );
     res.status(statusCode.OK)

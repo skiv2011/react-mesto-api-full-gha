@@ -11,7 +11,8 @@ const auth = async (req, res, next) => {
 
   let payload;
   try {
-    payload = jwt.verify(token, 'dev-secret');
+    // eslint-disable-next-line no-undef
+    payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
     req.user = payload;
     next();
   } catch (err) {
