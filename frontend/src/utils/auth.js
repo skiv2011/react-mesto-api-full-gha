@@ -1,6 +1,6 @@
 
-export const BASE_URL = 'https://api.firemandzen.nomoredomains.monster';
-// export const BASE_URL = 'http://localhost:3000';
+// export const BASE_URL = 'https://api.firemandzen.nomoredomains.monster';
+export const BASE_URL = 'http://localhost:3000';
 
 const check= (res) => {
     if (res.ok) {
@@ -29,10 +29,10 @@ const check= (res) => {
       },
       body: JSON.stringify({ email, password }),
     }).then(check)
-    .then((data) => {
-      localStorage.setItem('userId', data._id)
-      return data;
-    })
+    // .then((data) => {
+    //   localStorage.setItem('userId', data._id)
+    //   return data;
+    // })
   };
 
   export const logout = () => {
@@ -53,7 +53,6 @@ const check= (res) => {
       headers: {
         Accept: "application/json",
         'Content-Type': 'application/json',
-
       },
 
     }).then(check);

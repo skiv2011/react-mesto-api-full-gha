@@ -33,6 +33,7 @@ function App() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
+    tokenCheck();
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([user, initialCards]) => {
         setCurrentUser(user);
@@ -80,7 +81,7 @@ function App() {
     auth
       .login(email, password)
       .then((data) => {
-        localStorage.setItem('userId', data._id);
+        localStorage.setItem('token', data.token);
         setUserEmail(email);
         setLoggedIn(true);
         history('/');
@@ -115,13 +116,13 @@ function App() {
   }
 
   function handleLogout() {
-    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
     setLoggedIn(false);
     history("/signin");
   }
 
   function tokenCheck() {
-    const jwt = localStorage.getItem('userId');
+    const jwt = localStorage.getItem('token');
     if (!jwt) {
       return;
     }

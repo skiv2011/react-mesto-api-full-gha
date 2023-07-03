@@ -8,6 +8,8 @@ const ConflictError = require('../errors/conflict-err');
 const { statusCode } = require('../utils/errors');
 const User = require('../models/user');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const mongoUpdateConfig = { new: true, runValidators: true };
 
 module.exports.getUsers = async (req, res, next) => {
@@ -92,7 +94,7 @@ module.exports.login = async (req, res, next) => {
     const token = await jwt.sign(
       { _id: user._id },
       // eslint-disable-next-line no-undef
-      process.env.NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
       { expiresIn: '7d' },
     );
     res.status(statusCode.OK)
