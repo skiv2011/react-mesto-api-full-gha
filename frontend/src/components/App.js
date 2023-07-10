@@ -32,17 +32,20 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
+
   useEffect(() => {
-    tokenCheck();
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([user, initialCards]) => {
         setCurrentUser(user);
         setCards(initialCards);
+        history('/');
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+       }
+}, [loggedIn]);
 
   useEffect(() => {
     const handleEscClose = (evt) => {
@@ -72,16 +75,11 @@ function App() {
     selectedCard.isOpen,
   ]);
 
-  useEffect(() => {
-    if (!loggedIn) return;
-    history("/");
-  }, [loggedIn]);
 
   function handleLogin(email, password) {
     auth
       .login(email, password)
-      .then((data) => {
-        localStorage.setItem('token', data.token);
+      .then(() => {
         setUserEmail(email);
         setLoggedIn(true);
         history('/');
@@ -116,24 +114,13 @@ function App() {
   }
 
   function handleLogout() {
-    localStorage.removeItem('token');
+    auth.logout()
+    .then(() => {
     setLoggedIn(false);
     history("/signin");
-  }
-
-  function tokenCheck() {
-    const jwt = localStorage.getItem('token');
-    if (!jwt) {
-      return;
-    }
-    auth
-      .tokenCheck(jwt)
-      .then(() => {
-        setLoggedIn(true);
-        history("/");
-      })
-      .catch((err) => console.log(err));
-  }
+  })
+  .catch((err) => console.log(err))
+  };
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
@@ -221,6 +208,7 @@ function App() {
         console.log(err);
       });
   }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

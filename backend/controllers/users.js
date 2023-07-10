@@ -60,7 +60,7 @@ module.exports.createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then((user) => res.status(statusCode.OK).send({
+    .then((user) => res.status(statusCode.CREATED).send({
       email: user.email,
       name: user.name,
       about: user.about,
@@ -141,7 +141,7 @@ module.exports.updateAvatar = async (req, res, next) => {
 module.exports.logout = async (req, res, next) => {
   try {
     res.status(statusCode.OK)
-      .cookie('token', '', {
+      .clearCookie('token', '', {
         maxAge: 0,
         httpOnly: true,
       })

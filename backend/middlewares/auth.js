@@ -7,7 +7,8 @@ const auth = async (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token) {
-    throw new AuthDataError('Необходима авторизация.');
+    next(new AuthDataError('Необходима авторизация.'));
+    return;
   }
 
   let payload;
@@ -17,7 +18,7 @@ const auth = async (req, res, next) => {
     req.user = payload;
     next();
   } catch (err) {
-    throw new AuthDataError('Необходима авторизация.');
+    next(new AuthDataError('Необходима авторизация.'));
   }
 };
 

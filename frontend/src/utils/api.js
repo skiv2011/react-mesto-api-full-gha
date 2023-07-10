@@ -12,10 +12,6 @@ class Api {
     return Promise.reject(`Возникла ошибка: ${res.status}`);
   }
 
-  getDataFromServer() {
-    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
-  }
-
   getUserInfo() {
       return fetch(`${this._baseUrl}/users/me`, {
       credentials: "include",
@@ -108,12 +104,13 @@ body: JSON.stringify({
 }
 
 const api = new Api({
-  baseUrl: 'https://api.firemandzen.nomoredomains.monster',
-  // baseUrl: 'http://localhost:3000',
+  // baseUrl: 'https://api.firemandzen.nomoredomains.monster',
+  baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',
   }
 });
 export default api;
+
 
 

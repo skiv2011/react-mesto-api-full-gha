@@ -20,7 +20,7 @@ module.exports.createCard = async (req, res, next) => {
   try {
     const { name, link } = req.body;
     const newCard = await Card.create({ name, link, owner: req.user._id });
-    res.status(statusCode.OK).send(newCard);
+    res.status(statusCode.CREATED).send(newCard);
   } catch (err) {
     next(err);
   }
