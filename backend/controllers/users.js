@@ -141,9 +141,10 @@ module.exports.updateAvatar = async (req, res, next) => {
 module.exports.logout = async (req, res, next) => {
   try {
     res.status(statusCode.OK)
-      .clearCookie('token', '', {
-        maxAge: 0,
+      .clearCookie('token', {
         httpOnly: true,
+        sameSite: 'none',
+        secure: true,
       })
       .send({ message: 'Вы разлогинились' });
   } catch (err) {

@@ -1,8 +1,6 @@
 class Api {
   constructor({baseUrl}) {
-
-    this._baseUrl = baseUrl;
-
+  this._baseUrl = baseUrl;
   }
 
   _check(res) {
@@ -22,13 +20,12 @@ class Api {
 
   editProfile(name, about) {
       return fetch(`${this._baseUrl}/users/me`, {
-        credentials: "include",
+      credentials: "include",
       method: "PATCH",
-
       headers: {
         "content-type": "application/json",
 },
-body: JSON.stringify({
+      body: JSON.stringify({
         name: name,
         about: about,
       }),
@@ -51,7 +48,6 @@ body: JSON.stringify({
       method: "POST",
       headers: {
         "content-type": "application/json",
-
       },
       body: JSON.stringify({
         name: title,
@@ -75,10 +71,8 @@ body: JSON.stringify({
       method: "PATCH",
       headers: {
         "content-type": "application/json",
-
       },
-
-      body: JSON.stringify({
+        body: JSON.stringify({
         avatar: avatar,
       }),
     }).then((res) => {
@@ -87,16 +81,13 @@ body: JSON.stringify({
   }
 
   changeLikeCardStatus(cardId, usePut) {
-
     const method = usePut ? "PUT" : "DELETE";
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       credentials: "include",
       method: method,
       headers: {
         "content-type": "application/json",
-
       },
-
     }).then((res) => {
       return this._check(res);
     });

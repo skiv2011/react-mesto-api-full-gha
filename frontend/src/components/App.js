@@ -34,18 +34,31 @@ function App() {
 
 
   useEffect(() => {
-    if (loggedIn) {
+    if (loggedIn){
       Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([user, initialCards]) => {
         setCurrentUser(user);
         setCards(initialCards);
-        history('/');
       })
-      .catch((err) => {
-        console.log(err);
-      });
-       }
+      .catch((err) =>
+        console.log(err))
+    }
+
 }, [loggedIn]);
+
+useEffect(() => {
+  auth
+    .tokenCheck()
+    .then(({ email }) => {
+      setLoggedIn(true);
+      history('/');
+      setUserEmail(email)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
+
 
   useEffect(() => {
     const handleEscClose = (evt) => {
@@ -121,6 +134,7 @@ function App() {
   })
   .catch((err) => console.log(err))
   };
+
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
